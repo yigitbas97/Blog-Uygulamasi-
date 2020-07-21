@@ -1,0 +1,18 @@
+﻿@model BlogMvcUI.Models.CategoryUpdateViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@*---Update Category Form*@
+<form asp-controller="Category" asp-action="Update" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.CategoryName"></label>
+        <input asp-for="@Model.CategoryName" class="form-control" />
+        <span asp-validation-for="@Model.CategoryName"></span>
+    </div>
+    <input type="hidden" asp-for="@Model.Id" />
+    <button type="submit" class="btn btn-success btn-lg btn-block">Update Category</button>
+</form>

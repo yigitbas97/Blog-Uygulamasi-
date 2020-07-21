@@ -1,0 +1,40 @@
+﻿@model BlogMvcUI.Models.PostSearchViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*---Control Counts of Posts*@
+@if (Model.Posts.Count == 0)
+{
+    <div class="alert alert-danger" role="alert">
+        Aradığınız kelimeyi içeren bir post bulunamadı !
+    </div>
+}
+
+@*---Show Searched Posts*@
+else
+{
+    @foreach (var post in Model.Posts)
+    {
+        var text = Html.Raw(post.PostContent);
+
+        @if (post.PostContent.Length > 300)
+        {
+            text = Html.Raw(post.PostContent.Substring(0, 297) + "...");
+        }
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">@post.Title</h2>
+                <p class="card-text">@text</p>
+                <a asp-action="Detail" asp-controller="Post" asp-route-postId="@post.Id" class="btn btn-primary">Read More →</a>
+            </div>
+            <div class="card-footer text-muted">
+                Posted on : @post.UploadDate.ToString("dd/MM/yyyy")
+            </div>
+        </div>
+    }
+}

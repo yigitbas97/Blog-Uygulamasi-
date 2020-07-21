@@ -1,0 +1,31 @@
+﻿@model BlogMvcUI.Models.GetCommentsByPostIdViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "GetCommentsByPostId";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@*---Comments By PostId---*@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Post Title</th>
+            <th scope="col">Comment</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comment in Model.Comments)
+        {
+            <tr>
+                <th scope="row">@Model.Post.Title</th>
+                <td>@comment.PostComment</td>
+                <td><a class="btn btn-danger" asp-action="Delete" asp-controller="Comment" asp-route-commentId="@comment.Id">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

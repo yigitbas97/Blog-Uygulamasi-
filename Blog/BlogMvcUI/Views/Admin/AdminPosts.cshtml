@@ -1,0 +1,54 @@
+﻿@model BlogMvcUI.Models.AdminPostsViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "AdminPosts";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@*---Add New Post---*@
+<a class="btn btn-success" asp-action="Add" asp-controller="Post">Add New Post</a>
+
+@*---Admin Post Table---*@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Post Title</th>
+            <th scope="col" colspan="3" style="text-align:center;">Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var post in Model.Posts)
+        {
+            <tr>
+                <th scope="row">@post.Id</th>
+                <td>@post.Title</td>
+                <td><a class="btn btn-primary" asp-action="GetCommentsByPostId" asp-controller="Comment" asp-route-postId="@post.Id">Show Comments</a></td>
+                <td><a class="btn btn-info" asp-action="Update" asp-controller="Post" asp-route-postId="@post.Id">Update</a></td>
+                <td><a class="btn btn-danger" asp-action="Delete" asp-controller="Post" asp-route-postId="@post.Id">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*---Pagination---*@
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+
+        @if (Model.CurrentPage - 1 > 0)
+        {
+            var previousPage = Model.CurrentPage - 1;
+            <li class="page-item"><a class="page-link" href="/Admin/AdminPosts/?page=@previousPage">Previous</a></li>
+        }
+
+        <li class="page-item"><a class="page-link">@Model.CurrentPage</a></li>
+
+        @if (Model.CurrentPage + 1 <= Model.PageNumber)
+        {
+            var nextPage = Model.CurrentPage + 1;
+            <li class="page-item"><a class="page-link" href="/Admin/AdminPosts/?page=@nextPage">Next</a></li>
+        }
+
+    </ul>
+</nav>

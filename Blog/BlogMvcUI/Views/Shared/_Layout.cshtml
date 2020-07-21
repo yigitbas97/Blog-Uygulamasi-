@@ -1,0 +1,92 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    
+    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/ckeditor/ckeditor.js"></script>
+</head>
+<body>
+    @*---Jumbotron---*@
+    <div class='row m-0'>
+        <div class='jumbotron jumbotron-fluid img-fluid m-0 p-0 d-flex justify-content-center align-items-center' style='width: 100%;  background-image: url("https://ademkomurcu.com.tr/wp-content/uploads/2018/11/programlama-ogrencek-olanalara-oneriler.jpg"); height: 45.5vh; min-height: 30.5vmin; background-repeat: no-repeat; background-size: cover; background-position: center center; flex-center;'>
+            <div class='col-12 mb-md-2 mx-auto text-center'>
+                <h1 class='h1-reponsive text-success text-uppercase font-weight-bold mb-0 pt-md-5 pt-5'>
+                    <a asp-action="Index" asp-controller="Post"> <strong class='text-capitalize' style="color:white;">YİĞİT'İN BLOGU</strong> </a>
+                </h1>
+                <h5 class='h5-responsive text-uppercase text-success'>
+                    <strong style="color:white;">Yazılım Dünyası</strong>
+                </h5>
+                <hr class='hr-light my-2 d-none d-md-block' style='width: 70%; border: 1.5px solid white;' />
+            </div>
+        </div>
+    </div>
+
+    @*---Message Control---*@
+    <div class="container" style="margin-top:10px; text-align:center;">
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-warning" role="alert">@TempData["message"]</div>
+        }
+    </div>
+
+    @*---Grid---*@
+    <div class="container-fluid">
+        <div class="row">
+
+            @*---Left 3 Columns---*@
+            <div class="col-md-3">
+                @*---Category List---*@
+                @await Component.InvokeAsync("CategoryList")
+
+
+                @*---Search---*@
+                <div class="card my-4">
+                    <h5 class="card-header">Search</h5>
+                    <div class="card-body">
+                        <form asp-action="Search" asp-controller="Post">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for..." name="searchedWord">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="submit">Go!</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            @*---Middle 6 columns Post Content---*@
+            <div class="col-md-6">
+                @RenderBody()
+            </div>
+
+            @*---Right 3 Columns---*@
+            <div class="col-md-3">
+                <!-- weather widget start -->
+                <div id="m-booked-weather-bl250-15889"> <div class="booked-wzs-250-175 weather-customize" style="background-color:#137AE9;width:160px;" id="width1"> <div class="booked-wzs-250-175_in"> <div class="booked-wzs-250-175-data"> <div class="booked-wzs-250-175-left-img wrz-03"> <a target="_blank" href="https://www.booked.net/"> <img src="//s.bookcdn.com/images/letter/logo.gif" alt="Booked.net" /> </a> </div> <div class="booked-wzs-250-175-right"> <div class="booked-wzs-day-deck"> <div class="booked-wzs-day-val"> <div class="booked-wzs-day-number"><span class="plus">+</span>14</div> <div class="booked-wzs-day-dergee"> <div class="booked-wzs-day-dergee-val">&deg;</div> <div class="booked-wzs-day-dergee-name">C</div> </div> </div> <div class="booked-wzs-day"> <div class="booked-wzs-day-d">H: <span class="plus">+</span>17&deg;</div> <div class="booked-wzs-day-n">L: <span class="plus">+</span>14&deg;</div> </div> </div> <div class="booked-wzs-250-175-info"> <div class="booked-wzs-250-175-city">İstanbul </div> <div class="booked-wzs-250-175-date">Cumartesi, 23 Kasım</div> <div class="booked-wzs-left"> <span class="booked-wzs-bottom-l">7 Günlük Hava Tahmini</span> </div> </div> </div> </div> <a target="_blank" href="https://bookeder.com/weather/istanbul-18319"> <table cellpadding="0" cellspacing="0" class="booked-wzs-table-250"> <tr> <td>Cu</td> <td>Pz</td> <td>Pt</td> <td>Sa</td> <td>Ça</td> <td>Pe</td> </tr> <tr> <td class="week-day-ico"><div class="wrz-sml wrzs-03"></div></td> <td class="week-day-ico"><div class="wrz-sml wrzs-01"></div></td> <td class="week-day-ico"><div class="wrz-sml wrzs-03"></div></td> <td class="week-day-ico"><div class="wrz-sml wrzs-18"></div></td> <td class="week-day-ico"><div class="wrz-sml wrzs-03"></div></td> <td class="week-day-ico"><div class="wrz-sml wrzs-01"></div></td> </tr> <tr> <td class="week-day-val"><span class="plus">+</span>14&deg;</td> <td class="week-day-val"><span class="plus">+</span>16&deg;</td> <td class="week-day-val"><span class="plus">+</span>17&deg;</td> <td class="week-day-val"><span class="plus">+</span>14&deg;</td> <td class="week-day-val"><span class="plus">+</span>14&deg;</td> <td class="week-day-val"><span class="plus">+</span>16&deg;</td> </tr> <tr> <td class="week-day-val"><span class="plus">+</span>14&deg;</td> <td class="week-day-val"><span class="plus">+</span>14&deg;</td> <td class="week-day-val"><span class="plus">+</span>13&deg;</td> <td class="week-day-val"><span class="plus">+</span>13&deg;</td> <td class="week-day-val"><span class="plus">+</span>12&deg;</td> <td class="week-day-val"><span class="plus">+</span>13&deg;</td> </tr> </table> </a> </div></div> </div>
+                <script type="text/javascript">var css_file = document.createElement("link"); css_file.setAttribute("rel", "stylesheet"); css_file.setAttribute("type", "text/css"); css_file.setAttribute("href", 'https://s.bookcdn.com/css/w/booked-wzs-widget-275.css?v=0.0.1'); document.getElementsByTagName("head")[0].appendChild(css_file); function setWidgetData(data) { if (typeof (data) != 'undefined' && data.results.length > 0) { for (var i = 0; i < data.results.length; ++i) { var objMainBlock = document.getElementById('m-booked-weather-bl250-15889'); if (objMainBlock !== null) { var copyBlock = document.getElementById('m-bookew-weather-copy-' + data.results[i].widget_type); objMainBlock.innerHTML = data.results[i].html_code; if (copyBlock !== null) objMainBlock.appendChild(copyBlock); } } } else { alert('data=undefined||data.results is empty'); } }</script>
+                <script type="text/javascript" charset="UTF-8" src="https://widgets.booked.net/weather/info?action=get_weather_info&ver=6&cityID=18319&type=3&scode=124&ltid=3458&domid=765&anc_id=96503&cmetric=1&wlangID=21&color=137AE9&wwidth=160&header_color=ffffff&text_color=333333&link_color=08488D&border_form=1&footer_color=ffffff&footer_text_color=333333&transparent=0"></script><!-- weather widget end -->
+
+                <br /><br />
+
+                @*---Clock Widget---*@
+                <table class="container">
+                    <tr><td style="text-align: center;"><canvas id="canvas_tt5dd89544e20ea" width="175" height="175"></canvas></td></tr>
+                    <tr><td style="text-align: center; font-weight: bold"><a href="//24timezones.com/world_directory/time_in_istanbul.php" style="text-decoration: none" class="clock24" id="tz24-1574475076-c1107-eyJzaXplIjoiMTc1IiwiYmdjb2xvciI6IjAwOTlGRiIsImxhbmciOiJlbiIsInR5cGUiOiJhIiwiY2FudmFzX2lkIjoiY2FudmFzX3R0NWRkODk1NDRlMjBlYSJ9" title="clock Istanbul" target="_blank" rel="nofollow">Time in Istanbul</a></td></tr>
+                </table>
+                <script type="text/javascript" src="//w.24timezones.com/l.js" async></script>
+            </div>
+        </div>
+    </div>
+
+    @*---Scripts---*@
+    <script src="~/bootstrap/jquery/jquery-3.4.1.js"></script>
+    <script src="~/bootstrap/js/bootstrap.js"></script>
+    <script src="~/bootstrap/jquery/jquery.validate.js"></script>
+    <script src="~/bootstrap/jquery/jquery.validate.unobtrusive.js"></script>
+
+</body>
+</html>

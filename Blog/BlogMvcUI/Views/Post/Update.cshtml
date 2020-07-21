@@ -1,0 +1,39 @@
+﻿@model BlogMvcUI.Models.PostUpdateViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@*---Update Post Form---*@
+<form asp-controller="Post" asp-action="Update" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.Title"></label>
+        <input asp-for="@Model.Title" class="form-control" />
+        <span asp-validation-for="@Model.Title"></span>
+    </div>
+    <div class="form-group">
+        <div class="form-group">
+            @Html.TextAreaFor(model => model.PostContent, new { @id = "editor1" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.CategoryId"></label>
+        <select asp-for="@Model.CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","CategoryName"))"></select>
+        <span asp-validation-for="@Model.CategoryId"></span>
+    </div>
+
+    <input type="hidden" asp-for="@Model.UploadDate" />
+    <input type="hidden" asp-for="@Model.Id" />
+    <button type="submit" class="btn btn-success btn-lg btn-block">Update Post</button>
+</form>
+
+@*---CK Editor Js*@
+<script type="text/javascript">
+    var editor = CKEDITOR.instances['editor1'];
+    if (editor) { editor.destroy(true); }
+    CKEDITOR.replace('editor1', {
+        enterMode: CKEDITOR.ENTER_BR,
+    });
+</script>

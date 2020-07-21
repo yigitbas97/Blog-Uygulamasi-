@@ -1,0 +1,44 @@
+﻿@model BlogMvcUI.Models.AdminIndexViewModel;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    @*---Admin Desciprion Section---*@
+    <div class="row">
+        <p>
+            Bu ekranda sitenize ait öğeler ile ilgili istatistiksel bilgiler gösterilmektedir.<br />
+
+            Sol taraftaki 'Components' panelinden yönetilebilir öğelerinize ulaşabilir, istediğiniz işlemi gerçekleştirebilirsiniz.<br />
+
+            Aşağıdaki 'LogOff' butonunu kullanarak yönetim paneli oturumunuzu sonlandırabilirsiniz.
+        </p>
+    </div>
+
+    @*---Statistics---*@
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card bg-primary text-white shadow">
+                <div class="card-body">
+                    Total Post
+                    <div class="text-white-50 small">@Model.NumberOfPosts</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-primary text-white shadow">
+                <div class="card-body">
+                    Total Categories
+                    <div class="text-white-50 small">@Model.NumberOfCategories</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*---LogOff Button---*@
+<a class="btn btn-warning btn-lg btn-block" style="margin-top:15px;" asp-controller="Account" asp-action="LogOff">LogOff</a>
+
